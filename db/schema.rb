@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_13_065229) do
+ActiveRecord::Schema.define(version: 2020_02_13_071853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2020_02_13_065229) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["groups_id"], name: "index_member_ships_on_groups_id"
     t.index ["users_id"], name: "index_member_ships_on_users_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "body"
+    t.bigint "users_id", null: false
+    t.bigint "groups_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["groups_id"], name: "index_posts_on_groups_id"
+    t.index ["users_id"], name: "index_posts_on_users_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -52,5 +62,7 @@ ActiveRecord::Schema.define(version: 2020_02_13_065229) do
 
   add_foreign_key "member_ships", "groups", column: "groups_id"
   add_foreign_key "member_ships", "users", column: "users_id"
+  add_foreign_key "posts", "groups", column: "groups_id"
+  add_foreign_key "posts", "users", column: "users_id"
   add_foreign_key "profiles", "users"
 end
