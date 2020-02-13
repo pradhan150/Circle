@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :member_ships, dependent: :destroy
   has_many :groups, through: :member_ships
   has_many :posts
+  has_many :comments, dependent: :destroy
 
   validates :name, :email, :password, :date_of_birth, :mobile_number, :gender, presence: true
   validates :password, confirmation: true
