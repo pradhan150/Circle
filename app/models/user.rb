@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_one :profile
+
   validates :name, :email, :password, :date_of_birth, :mobile_number, :gender, presence: true
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
