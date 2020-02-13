@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: cicle_development
+  pool: 5
+  username: postgres
+  password: postgres
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: circle_test
+  pool: 5
+  username: postgres
+  password: postgres
+  timeout: 5000

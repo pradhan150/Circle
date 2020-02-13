@@ -1,0 +1,60 @@
+<p>You are in new</p>
+
+<%= form_with model: @user, local: true do |form| %>
+ 
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= form.label :Name %><br>
+    <%= form.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </p>
+  
+  <p>
+    <%= form.label :Password %><br>
+    <%= form.password_field :password %>
+  </p>
+ 
+  <p>
+    <%= form.label :"Confirm Password" %><br>
+    <%= form.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= form.label :'Mobile Number' %><br>
+    <%= form.telephone_field :mobile_number %>
+  </p>
+  
+  <p>
+    <%= form.label :'Date of birth' %><br>
+    <%= form.date_field :date_of_birth %>
+  </p>
+
+  <p>
+    <%= form.label :gender, 'Male' %>
+    <%= form.radio_button :gender, 'male' %>
+    <%= form.label :gender, 'Female' %>
+    <%= form.radio_button :gender, 'Female' %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
