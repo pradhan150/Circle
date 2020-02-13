@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  has_one :profile
+  has_one :profile, dependent: :destroy
+  has_many :member_ships, dependent: :destroy
+  has_mane :groups, through: :member_ships
 
   validates :name, :email, :password, :date_of_birth, :mobile_number, :gender, presence: true
   validates :password, confirmation: true
