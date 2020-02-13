@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_one :invitation, dependent: :destroy
+  has_many :messages
 
   validates :name, :email, :password, :date_of_birth, :mobile_number, :gender, presence: true
   validates :password, confirmation: true
