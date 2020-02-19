@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get 'users/index'
+  devise_for :users
 
-  resources :users do
-    resources :profiles 
+  devise_scope :user do
+    root to: 'devise/sessions#new'
   end
-  root 'users#index'
+
+  resources :users, only: :show
 end

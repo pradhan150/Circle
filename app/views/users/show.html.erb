@@ -2,13 +2,8 @@
   <strong>Welcome</strong>
   <%= @user.name%>
 </p>
-<%= link_to 'My Profile', user_profile_path %>
 <p>
   <%= @user.email%>
-</p>
-
-<p>
-  <%= @user.password%>
 </p>
 
 <p>
@@ -22,3 +17,5 @@
 <p>
   <%= @user.date_of_birth%>
 </p>
+
+<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
