@@ -1,7 +1,12 @@
+<p align = "right">
+  <%= link_to 'Create new group', new_group_path %>
+</p>
+
 <p>
   <strong>Welcome</strong>
   <%= @user.name%>
 </p>
+
 <p>
   <%= @user.email%>
 </p>
@@ -18,4 +23,21 @@
   <%= @user.date_of_birth%>
 </p>
 
-<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+<h3> Groups </h3>
+<% @user.member_ships.each do |membership|%>
+  <tr>
+    <p>
+      <td><%= membership.group.name %></td>
+      <td><%= membership.role %></td>
+      <td><%= link_to 'Show', group_path(membership.group) %></td>
+    </p> 
+  </tr>
+<% end %>
+
+<p>
+  <%= button_to 'Edit Profile', edit_user_registration_path, :method => "get" %>
+</p>
+
+<p>
+<%= button_to 'Logout', destroy_user_session_path, method: :delete %>
+</p>
