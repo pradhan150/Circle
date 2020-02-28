@@ -1,7 +1,11 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable
+  devise :database_authenticatable, :registerable, :confirmable, :validatable, :rememberable, :recoverable
 
-  has_one :profile, dependent: :destroy
+  ROLES = {
+    admin: 'admin'
+  }
+
+  has_one_attached :avatar
   has_many :member_ships, dependent: :destroy
   has_many :groups, through: :member_ships
   has_many :posts
@@ -10,11 +14,8 @@ class User < ApplicationRecord
   has_one :invitation, dependent: :destroy
   has_many :messages
 
-  validates :name, :email, :password, :date_of_birth, :mobile_number, :gender, presence: true
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
-  validates :password, length: { in: 6..20 }
-  validates :email, :mobile_number, uniqueness: true
+  validates :name, :date_of_birth, :mobile_number, :gender, presence: true
+  validates :mobile_number, uniqueness: true
   # validate :age_must_be_greater_than_13
 
   def age_must_be_greater_than_13

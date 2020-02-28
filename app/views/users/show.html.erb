@@ -1,43 +1,69 @@
-<p align = "right">
-  <%= link_to 'Create new group', new_group_path %>
-</p>
+<div class="home">
+  <div class="row">
+    <div class="col-sm-8 bg-light">
+      <div class="row">
+        <div class="col-sm-6 bg-light">
+          <p>
+            <strong>Welcome</strong>
+            <%= @user.name %>
+          </p>
 
-<p>
-  <strong>Welcome</strong>
-  <%= @user.name%>
-</p>
+          <p>
+            <%= @user.email%>
+          </p>
 
-<p>
-  <%= @user.email%>
-</p>
+          <p>
+            <%= @user.mobile_number%>
+          </p>
 
-<p>
-  <%= @user.mobile_number%>
-</p>
+          <p>
+            <%= @user.gender%>
+          </p>
 
-<p>
-  <%= @user.gender%>
-</p>
+          <p>
+            <%= @user.date_of_birth%>
+          </p>
+          
+          <p>
+            <%= button_to 'Edit Profile', edit_user_registration_path, class: "btn btn-success", :method => "get" %>
+          </p>
+        </div>
+        <div class="col-sm-6 bg-light">
+          <% if @user.avatar.attached? %>
+          <%= image_tag (@user.avatar), class: "profile" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-<p>
-  <%= @user.date_of_birth%>
-</p>
+    <div class="col-sm-4 bg-white">
+      <h3> Groups </h3>
+      <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      <br>
+      <table class="table">
+        <tbody id="myTable">
+          <% @user.member_ships.each do |membership|%>
+            <tr>
+              <td><%= membership.group.name %></td>
+              <td><span class="badge badge-info"><%= membership.role %></span></td>
+              <td><%= link_to 'Show', group_path(membership.group), class: 'btn btn-outline-success btn-sm' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+</div>
 
-<h3> Groups </h3>
-<% @user.member_ships.each do |membership|%>
-  <tr>
-    <p>
-      <td><%= membership.group.name %></td>
-      <td><%= membership.role %></td>
-      <td><%= link_to 'Show', group_path(membership.group) %></td>
-    </p> 
-  </tr>
-<% end %>
 
-<p>
-  <%= button_to 'Edit Profile', edit_user_registration_path, :method => "get" %>
-</p>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>  
 
-<p>
-<%= button_to 'Logout', destroy_user_session_path, method: :delete %>
-</p>
