@@ -1,0 +1,1 @@
+$('#like-<%= @comment.id %>').html("<%= j render partial: 'destroy', locals: { comment: @comment, like: @like, count: @count } %>")

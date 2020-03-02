@@ -1,0 +1,23 @@
+<table class="table">
+  <tbody>
+    <% @current_members.each do |current_member| %>
+      <% current_membership = MemberShip.find_by(user_id: current_member.id, group_id: @group.id) %>
+      <tr>
+        <td><%= current_member.name %></td>  
+        <td>
+          <% if @member_ship.role == 'admin' && current_member != current_user %>
+          <%= link_to "Remove", member_ship_path(current_membership), class: "btn btn-warning btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+        <td><span class="badge badge-info"><%= current_membership.role %></span></td>
+        <td>
+          <% if current_membership.role != 'admin' && @member_ship.role == 'admin' %>
+            <%= link_to "Make Admin", member_ship_path(current_membership), class: "btn btn-success btn-sm" , method: :patch %>
+          <% elsif current_membership.role == 'admin' && @member_ship.role == 'admin' %>
+            <%= link_to "Remove Admin", member_ship_path(current_membership), class: "btn btn-danger btn-sm", method: :patch %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<br>
+<div>
+  <strong><%= comment.user.name %></strong>
+  <%= link_to "delete", comment_path(comment), method: :delete, style: "float: right;" %>
+
+  <div id="like-<%= comment.id %>", style='float: right;'>
+    <% if comment.likes.find_by(user_id: current_user.id).nil? %>
+      <%= link_to(comment_likes_path(comment), method: :post, remote: true) do %>
+        like<span class="badge badge-light" ><%= comment.likes.size %></span>
+      <% end %>
+    <% else %>
+      <%= link_to(comment_like_path(comment, comment.likes.find_by(user_id: current_user.id)), method: :delete, remote: true ) do %>
+        like<span class="badge badge-light" ><%= comment.likes.size %></span>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+<div>
+  <%= comment.body %>
+</div>

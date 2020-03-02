@@ -1,0 +1,1 @@
+$('#like-<%= @post.id %>').html("<%= j render partial: 'create', locals: { post: @post, count: @count } %>")

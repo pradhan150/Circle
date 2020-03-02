@@ -11,8 +11,10 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_one :invitation, dependent: :destroy
+  # has_one :invitation, dependent: :destroy
   has_many :messages
+  has_many :received_invitations, class_name: 'Invitation', foreign_key: 'receiver_id'
+  has_many :sent_invitations, class_name: 'Invitation', foreign_key: 'sender_id'
 
   validates :name, :date_of_birth, :mobile_number, :gender, presence: true
   validates :mobile_number, uniqueness: true

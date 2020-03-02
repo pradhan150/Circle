@@ -1,48 +1,49 @@
-<div class="home">
+<div class='home' >
   <div class="row">
     <div class="col-sm-8 bg-light">
       <div class="row">
         <div class="col-sm-6 bg-light">
+        
           <p>
             <strong>Welcome</strong>
-            <%= @user.name %>
+            <%= current_user.name %>
           </p>
 
           <p>
-            <%= @user.email%>
+            <%= current_user.email %>
           </p>
 
           <p>
-            <%= @user.mobile_number%>
+            <%= current_user.mobile_number %>
           </p>
 
           <p>
-            <%= @user.gender%>
+            <%= current_user.gender %>
           </p>
 
           <p>
-            <%= @user.date_of_birth%>
+            <%= current_user.date_of_birth %>
           </p>
           
           <p>
             <%= button_to 'Edit Profile', edit_user_registration_path, class: "btn btn-success", :method => "get" %>
           </p>
         </div>
+
         <div class="col-sm-6 bg-light">
-          <% if @user.avatar.attached? %>
-          <%= image_tag (@user.avatar), class: "profile" %>
-          <% end %>
+          <%= image_tag (current_user.avatar), class: "profile" if current_user.avatar.attached? %>
         </div>
+
       </div>
     </div>
 
     <div class="col-sm-4 bg-white">
       <h3> Groups </h3>
-      <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      <%= text_field_tag :search, nil, id: 'myInput', placeholder: 'Search...', class: 'form-control' %>
       <br>
       <table class="table">
         <tbody id="myTable">
-          <% @user.member_ships.each do |membership|%>
+          <% current_user.member_ships.each do |membership|%>
             <tr>
               <td><%= membership.group.name %></td>
               <td><span class="badge badge-info"><%= membership.role %></span></td>

@@ -1,0 +1,46 @@
+<div class="home">
+  <div class="row">
+    <div class="col-sm-3 bg-light">
+      <%= link_to "Exit Group", member_ship_path(@member_ship), class: "btn btn-warning", method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to "Back", @group, class: "btn btn-primary"%>
+    </div>
+
+    <div class="col-sm-6 bg-light">
+      <% if @member_ship.role == 'admin'%>
+        <div class="row">
+          <div class="col-sm-6 bg-light">
+            <%= link_to "Delete Group", @group, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }%>
+          </div>
+          <div class="col-sm-6 bg-light">
+            <%= link_to "Edit Group", edit_group_path(@group), class: "btn btn-success"%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-sm-3 bg-light">
+      <%= form_tag(invitations_path(group_id: @group.id)) do %>
+      
+        <select class="invite" name="receiver_ids[]" multiple="multiple">
+          <% @users.each do |user| %>
+            <option value="<%= user.id %>"><%= user.name %></option>
+          <% end %> 
+        </select>
+
+        <%= submit_tag "Invite", class: 'btn btn-success' %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<div class="home">
+  <h3>Current Members</h3>
+  <%= render partial: 'groups/current_members' %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.invite').select2();
+});
+</script>

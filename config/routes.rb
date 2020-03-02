@@ -19,11 +19,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts
+  resources :posts do
+    scope module: 'post' do
+      resources :likes, only: [:create, :destroy]
+    end
+  end
 
-  resources :comments
-
-  resources :likes
+  resources :comments do
+    scope module: 'comment' do
+      resources :likes, only: [:create, :destroy]
+    end 
+  end
 
   resources :member_ships, only: [:destroy, :update]
  

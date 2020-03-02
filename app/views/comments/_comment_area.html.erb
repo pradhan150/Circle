@@ -1,0 +1,40 @@
+<%= form_with model: Comment.new, remote: true do |form| %>
+  <%= hidden_field_tag 'comment[post_id]', post.id %>
+
+  <div class="form-group">
+    <%= form.text_area :body, placeholder: 'Add a comment...', class: 'form-control', required: 'ture' %>
+  </div>
+
+  <div class="actions">
+      <%= form.submit "Add comment", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<div id="parrent_div<%= post.id %>">
+  <% post.comments.order(created_at: :desc).each do |comment| %>
+    <br>
+    <div class="bg-white">
+    <div>
+      <strong><%= comment.user.name %></strong>
+      <% if comment.user_id == current_user.id %>
+        <%= link_to "delete", comment_path(comment), method: :delete, style: "float: right;", remote: true %>
+      <% end %>
+
+      <div id="like-<%= comment.id %>", style='float: right;'>
+      <% if comment.likes.find_by(user_id: current_user.id).nil? %>
+        <%= link_to(comment_likes_path(comment), method: :post, remote: true) do %>
+          like<span class="badge badge-light" ><%= comment.likes.size %></span>
+        <% end %>
+      <% else %>
+        <%= link_to(comment_like_path(comment, comment.likes.find_by(user_id: current_user.id)), method: :delete, remote: true ) do %>
+          like<span class="badge badge-light" ><%= comment.likes.size %></span>
+        <% end %>
+      <% end %>
+    </div>
+
+    </div>
+    <div><%= comment.body %></div>
+    </div>
+  <% end %>
+
+</div>

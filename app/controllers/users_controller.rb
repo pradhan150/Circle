@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+  
   def show
-    @user = current_user
-    @count = Invitation.where(receiver_id: current_user.id).count
+    @invitation_count = current_user.received_invitations.count
   end 
 end

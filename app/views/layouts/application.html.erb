@@ -4,12 +4,46 @@
     <title>Circle</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <nav class="navbar navbar-default navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><h1>Circle</h1></a>
+      </div>
+
+      <% if current_user.present? %>
+        <div>
+          <%= link_to(invitations_path, class: "btn btn-outline-primary") do %>
+            Invitations
+            <span class="badge badge-light"><%= @invitation_count %></span>
+          <% end %>
+        </div>
+        <div >
+          <%= link_to "Home", user_path(current_user), class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
+
+      <div class="nav navbar-nav navbar-right">
+        <% if current_user.blank? %>
+          <div><%= link_to "Sign up", new_registration_path(resource_name) %><br/></div>
+          <div><%= link_to "Log in", new_session_path(resource_name) %></div>
+        <% else %>
+          <div><%= link_to 'Logout', destroy_user_session_path, method: :delete %></div>
+          <div><%= link_to 'Create new group', new_group_path %></div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  <div>
+    <body>
+      <%= render partial: 'layouts/flash' %>
+      <%= yield %> 
+    </body>
+  </div>
 </html>

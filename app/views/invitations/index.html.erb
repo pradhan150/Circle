@@ -1,0 +1,44 @@
+<div class="home">
+  <div class="row">
+
+    <div class="col-sm-6 bg-light">
+      <h3> Received Invitations </h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Sender</th>
+            <th>Group</th>
+          </tr>
+          <% @in_invitations.each do |invitation| %>
+            <tr>
+              <td><%= invitation.sender.name %></td>
+              <td><%= invitation.group.name %></td>
+              <td><%= link_to 'Accept', accept_invitation_path(invitation), class: "btn btn-success"  %></td>
+              <td><%= link_to 'Reject', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm-6 bg-white">
+      <h3> Sent Invitations </h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Receiver</th>
+            <th>Group</th>
+          </tr>
+          <% @out_invitations.each do |invitation| %>
+            <tr>
+              <td><%= invitation.receiver.name %></td>
+              <td><%= invitation.group.name %></td>
+              <td><%= link_to 'Delete', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
