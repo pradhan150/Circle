@@ -1,36 +1,37 @@
+<div class="container bg-light">
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'Enter your name' %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: 'Enter your name', class: 'form-control' %>
     </p>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :email %><br />
-    <%= f.email_field :email, placeholder: 'enter your email' %>
+    <%= f.email_field :email, placeholder: 'enter your email', class: 'form-control' %>
     </p>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :'Mobile Number' %><br />
-    <%= f.telephone_field :mobile_number, placeholder: 'enter your mobile number' %>
+    <%= f.telephone_field :mobile_number, placeholder: 'enter your mobile number', class: 'form-control' %>
     </p>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :'Date of Birth' %><br />
     <%= f.date_field :date_of_birth %>
     </p> 
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :gender, 'Male' %>
     <%= f.radio_button :gender, 'male' %>
@@ -39,28 +40,29 @@
     </p>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, placeholder: 'enter your password' %>
+    <%= f.password_field :password, placeholder: 'enter your password', class: 'form-control' %>
     </p>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <p>
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, placeholder: 're-enter your password' %>
+    <%= f.password_field :password_confirmation, placeholder: 're-enter your password', class: 'form-control' %>
     </p>
   </div>
 
   <div class="actions">
     <p>
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: 'btn btn-primary' %>
     </p>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
