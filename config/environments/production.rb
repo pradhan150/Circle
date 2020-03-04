@@ -13,15 +13,15 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.action_mailer.default_url_options = { host: 'https://powerful-springs-66620.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'circle222.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'pradhan37202@gmail.com'}
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    user_name: 'pradhan37202@gmail.com',
-    password: 'P1235a31b0%',
+    user_name: ENV['EMAIL_USERNAME'],
+    password: ENV['EMAIL_PASSWORD'],
     domain: "google.com",
     authentication: 'plain',
     enable_starttls_auto: true
