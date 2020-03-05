@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: circle222
+  api_key: '635987167226775'
+  api_secret: oABxlC3EjKDnzwtThq6-5jt79yY
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: circle222
+  api_key: '635987167226775'
+  api_secret: oABxlC3EjKDnzwtThq6-5jt79yY
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: circle222
+  api_key: '635987167226775'
+  api_secret: oABxlC3EjKDnzwtThq6-5jt79yY
+  enhance_image_tag: true
+  static_file_support: false
