@@ -1,19 +1,18 @@
-class GroupsController < ApplicationController 
+class GroupsController < ApplicationController
+  before_action :load_group, only: [:info, :show, :edit, :destroy]
+
   def new
     @group = Group.new
     @member_ship = MemberShip.new
   end
 
   def info
-    @group = current_user.groups.find_by(id: params[:id])
-    @member_ship = MemberShip.find_by(user_id: current_user.id, group_id: params[:id])
-    @users = User.find_by_sql("select * from users where not id = #{current_user.id} and id not in (select receiver_id from invitations where group_id = #{@group.id}) and id not in (select user_id from member_ships where group_id = #{@group.id})")
+    @member_ship = current_user.member_ships.find_by(group_id: params[:id])
+    @users = User.invitable(@group.invited_user_ids)
     @current_members = @group.users
-    # @current_members = User.find_by_sql("select * from users where id in (select user_id from member_ships where group_id = #{@group.id})")
   end
 
   def show
-    @group = current_user.groups.find_by(id: params[:id])
     @posts = @group.posts.order(created_at: :desc)
   end
 
@@ -28,15 +27,13 @@ class GroupsController < ApplicationController
     end
   end
 
-  def edit
-    @group = current_user.groups.find_by(id: params[:id])
+  def edit    
   end
 
   def update
   end
 
   def destroy
-    @group = current_user.groups.find_by(id: params[:id])
     @group.destroy
 
     redirect_to user_path(current_user)
@@ -46,5 +43,10 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name)
+  end
+
+  def load_group
+    @group = current_user.groups.find_by(id: params[:id])
+    redirect_to user_path(current_user), flash: { danger: 'Group is not present'} if @group.blank?
   end
 end

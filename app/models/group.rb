@@ -6,4 +6,8 @@ class Group < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :name, presence: true
+
+  def invited_user_ids
+    invitations.pluck(:receiver_id) + member_ships.pluck(:user_id)
+  end
 end

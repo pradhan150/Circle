@@ -4,9 +4,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = current_user.comments.create(comment_params)
-    @post = @comment.post
-    flash.now[:notice] = "your comment has been sent successfully"
+    @comment = current_user.comments.new(comment_params)
+
+    if @comment.save
+      @post = @comment.post
+      flash.now[:notice] = 'your comment has been sent successfully'
+    else
+      flash.now[:danger] = 'comment has not been created'
+    end
   end
 
   def destroy

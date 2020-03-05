@@ -20,6 +20,8 @@ class User < ApplicationRecord
   validates :mobile_number, uniqueness: true
   # validate :age_must_be_greater_than_13
 
+  scope :invitable, ->(invited_user_ids) { where.not(id: invited_user_ids)}
+
   def age_must_be_greater_than_13
     if Date.today.year - date_of_birth.year < 13
       errors.add(:date_of_birth, "age must be greater than or equal to 13")

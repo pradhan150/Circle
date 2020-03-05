@@ -4,13 +4,10 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-
       <div class="container mt-3">
         <h2>Invite</h2> 
         <%= select_tag :users, options_for_select(@users.map {|u| [u.name, u.id]}), class: 'form-control' %>
       </div>
-
     </div>
-
   </div>
 </div>

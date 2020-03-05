@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  before_action :load_invitation, only: [:accept, :destroy]
+
   def index
     @in_invitations = Invitation.where(receiver_id: current_user.id)
     @out_invitations = Invitation.where(sender_id: current_user.id)
@@ -16,18 +18,21 @@ class InvitationsController < ApplicationController
   end
 
   def accept
-    @invitation = Invitation.find_by(id: params[:id])
     @member_ship = MemberShip.create(user_id:@invitation.receiver_id, group_id: @invitation.group_id)
-    flash[:notice] = "invitation accepted successfully"
+    flash[:notice] = 'invitation accepted successfully'
     @invitation.destroy
 
     redirect_to invitations_path
   end
 
   def destroy
-    @invitation = Invitation.find_by(id: params[:id])
     @invitation.destroy
-
     redirect_to invitations_path
+  end
+
+  private
+  def load_invitation
+    @invitation = Invitation.find_by(id: params[:id])
+    redirect_to user_path(current_user), flash: { danger: 'invitation is not present'} if @invitation.blank?
   end
 end
