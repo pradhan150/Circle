@@ -21,7 +21,7 @@
     <div class="col-sm-3 bg-light">
       <%= form_tag(invitations_path(group_id: @group.id)) do %>
       
-        <select class="invite" name="receiver_ids[]" multiple="multiple">
+        <select class="invite" name="receiver_ids[]" multiple="multiple" style="width: 210px;">
           <% @users.each do |user| %>
             <option value="<%= user.id %>"><%= user.name %></option>
           <% end %> 
