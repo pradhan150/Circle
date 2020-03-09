@@ -51,8 +51,63 @@
       </div>
     </div>
 
-    <div class="col-sm-3 bg-white">
-      
+    <div class="col-sm-4 bg-white"  >
+
+      <div class="chat" data-channel-subscribe="group" data-group-id="<%= @group.id %>">
+        <% @group.messages.each do |room_message| %>
+          <div class="chat-message-container">
+            <div class="row no-gutters">
+              <div class="col-auto text-center">
+                <img src="<%= room_message.user%>" class="avatar" alt="">
+
+              </div>
+
+              <div class="col">
+                <div class="message-content">
+                  <div class="text-right">
+                    <small>
+                      <%= room_message.user.name %>
+                    </small>
+                  </div>
+
+                  <p class="mb-1">
+                    <%= room_message.body %>
+                  </p>
+
+                  <div class="text-right">
+                    <small>
+                      <%= room_message.created_at %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="chat-input"><%= render partial: 'messages/form', locals: { group: @group} %></div>
+    </div>
+  </div>
+</div>
+
+<div class="d-none" data-role="message-template">
+  <div class="chat-message-container">
+    <div class="row no-gutters">
+      <div class="col-auto text-center">
+        <img src="" class="avatar" alt="" data-role="user-avatar">
+      </div>
+
+      <div class="col">
+        <div class="message-content">
+          <p class="mb-1" data-role="message-text"></p>
+
+          <div class="text-right">
+            <small data-role="message-date"></small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
