@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validates :name, :date_of_birth, :mobile_number, :gender, presence: true
   validates :mobile_number, uniqueness: true
-  # validate :age_must_be_greater_than_13
+  #validate :age_must_be_greater_than_13
 
   scope :invitable, ->(invited_user_ids) { where.not(id: invited_user_ids)}
 

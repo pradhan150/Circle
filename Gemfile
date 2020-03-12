@@ -22,6 +22,13 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'factory_bot_rails'
+gem 'rails-controller-testing'
+
+group :development, :test do
+  # Note that rspec-rails 4.0 is still a beta release
+  gem 'rspec-rails', '~> 4.0.0.beta'
+end
 
 gem 'cloudinary'
 

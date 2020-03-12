@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
-    
     if @post.save
       flash[:notice] = 'your post has been sent successfully'
     else
