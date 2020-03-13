@@ -1,8 +1,13 @@
 class MessagesController < ApplicationController
   def create
-    @message = current_user.messages.create(message_params)
-  #GroupChannel.broadcast_to(message.group, message)
-   ActionCable.server.broadcast 'group_channel',message: @message
+    @group = current_user.groups.find_by(id: params[:message][:group_id])
+    @body = params[:message][:body]
+
+    @message = current_user.messages.create user: current_user,
+                              group: @group,
+                              body: params.dig(:message, :body)
+
+    GroupChannel.broadcast_to @group, {message: @message, user: current_user}
   end
 
   private

@@ -57,10 +57,10 @@
         <% @group.messages.each do |room_message| %>
           <div class="chat-message-container">
             <div class="row no-gutters">
-              <div class="col-auto text-center">
+              <!-- <div class="col-auto text-center">
                 <img src="<%= room_message.user%>" class="avatar" alt="">
 
-              </div>
+              </div> -->
 
               <div class="col">
                 <div class="message-content">
@@ -95,12 +95,13 @@
 <div class="d-none" data-role="message-template">
   <div class="chat-message-container">
     <div class="row no-gutters">
-      <div class="col-auto text-center">
-        <img src="" class="avatar" alt="" data-role="user-avatar">
-      </div>
 
       <div class="col">
         <div class="message-content">
+          <div class="text-right">
+            <small data-role="message-user"></small>
+          </div>
+
           <p class="mb-1" data-role="message-text"></p>
 
           <div class="text-right">
