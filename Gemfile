@@ -29,7 +29,7 @@ group :development, :test do
   # Note that rspec-rails 4.0 is still a beta release
   gem 'rspec-rails', '~> 4.0.0.beta'
 end
-
+# commented for git
 gem 'cloudinary'
 
 gem 'jquery-rails'
